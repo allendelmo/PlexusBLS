@@ -14,7 +14,7 @@
 
     /* Header */
     header {
-      position: fixed;
+      position:fixed;
       top: 0;
       left: 0;
       right: 0;
@@ -30,12 +30,15 @@
       flex-wrap: wrap; /* allows logo/nav to wrap if screen is narrow */
       }
 
-    header h1 {
+    header h1{
     display: flex;
     align-items: center;
     gap: 10px;
     margin: 0;
     flex-shrink: 0;
+    }
+    header img:hover{
+      transform: scale(1.1);
     }
     header h1 img {
     height: 44px;
@@ -43,9 +46,9 @@
     display: block;
     }
     header .brand {
-  font-size: 20px;
-  font-weight: 700;
-}
+    font-size: 20px;
+    font-weight: 700;
+    }
     nav a {
     text-decoration: none;
     color: white;
@@ -176,6 +179,10 @@
     .course-card h3 {
       margin-top: 0;
       color: #0b84ff;
+    }
+
+    section {
+    scroll-margin-top: var(--header-height, 70px); /* adjust if your header is taller */
     }
 
     /* Contact form
@@ -332,28 +339,30 @@
 <body>
   <header>
   <h1>
-    <img src="./Pictures/logo.jpg" alt="Plexus CPR Logo">
+    <a href="#hero"><img src="./Pictures/logo.jpg" alt="Plexus CPR Logo"></a>
     <span class="brand">Plexus CPR</span>
   </h1>
     <nav>
   <ul id="nav-list" class="nav-list">
+    <li><a href="#welcome">Home</a></li>
     <li><a href="#courses">Courses</a></li>
-    <li><a href="#register">Register</a></li>
-    <li><a href="#about">About Us</a></li>
+    <!-- <li><a href="#register">Register</a></li> -->
     <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#schedule">Schedule</a></li>
+    <!-- <li><a href="#contact">Contact</a></li> -->
+    <!-- <li><a href="#schedule">Schedule</a></li> -->
     <li><a href="#followus">Follow Us</a></li>
+    <li><a href="#about">About Us</a></li>
   </ul>
 </nav>
 </header>
-
-
   <section class="hero">
-    <h2>Learn. Save Lives. Get Certified.</h2>
+    <section id="hero">
+    <h2>Learn. Get Certified. Save Lives.</h2>
     <p>Join our Basic Life Support courses and gain the skills to act confidently in emergencies.</p>
-    <button class="btn btn-primary" onclick="location.href='#register'">Enroll Now</button>
+    <button class="btn btn-primary" onclick="window.location.href='https://wa.me/966550560114?text=I%27m%20interested%20in%20your%20services%20'">Enroll now</button>
+    <!--<button class="btn btn-primary" onclick="location.href='#register'">Enroll Now</button>-->
     <button class="btn btn-secondary" onclick="location.href='#courses'">View Courses</button>
+    </section>
   </section>
 
   <main>
@@ -389,7 +398,7 @@
       <ul>
         <li>Centrally located building with easy access and visibility.</li>
         <li>Modern Classrooms and training halls with advanced audio-visual systems. Also, with high-speed internet connections.</li>
-        <li>High-quality manikins,AEDs, and training materials that meet international standards.</li>
+        <li>High-quality manikins, AEDs, and training materials that meet international standards.</li>
         <li>Dedicated rental office suites and medical clinic units.</li>
         <li>Spacious reception and waiting areas for comfort and convenience.</li>
       </ul>
@@ -454,6 +463,7 @@
 
   <footer>
     <div class="footer-container">
+      <section id="about">
       <div class="footer-about">
         <h3>About Us</h3>
         <p>Plexus CPR is committed to providing high-quality training in life-saving skills. Our certified instructors bring years of healthcare and emergency response experience to ensure every participant leaves confident and prepared.</p>
@@ -461,9 +471,9 @@
       <div class="footer-contact">
         <h3>Contact Us</h3>
         <p>Phone: +9665XXXXXXXXX</p>
-        <p>Email: email@example.com</p>
+        <p>Email Address: <a href="mailto:someone@gmail.com">Email Address</a></p>
         <p>Address: Emaar Square, Al Sharm Street, Al Fayha'a, Jeddah 22241</p>
-        <p>Office Hours: Mon-Fri 9am - 5pm</p>
+        <p>Office Hours: </p>
       </div>
       <div class="footer-location">
         <h3>Our Location</h3>
@@ -473,6 +483,7 @@
     <div class="footer-bottom">
       <p>&copy; 2025 Plexus CPR. All rights reserved.</p>
     </div>
+    </section>
   </footer>
 
   <script>
