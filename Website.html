@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plexus CPR</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('./Pictures/plexus_Reception.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    header {
+      background: rgba(30, 142, 126);
+      color: white;
+      padding: 10px;
+      display: flex;
+      /*justify-content: space-between;*/
+      justify-content:space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 35px;
+      display: flex;
+      align-items: center;
+    }
+
+    header h1 img {
+    height: 50px; /* Smaller logo */
+    margin-right: 10px;
+    }
+
+    nav a {
+      margin-left: 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+    }
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    .hero .btn {
+      padding: 12px 24px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background-color: #0b84ff;
+      color: white;
+    }
+    .btn-secondary {
+      background-color: white;
+      color: #0b84ff;
+    }
+
+    main {
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      max-width: 1000px;
+      margin: 40px auto;
+      border-radius: 8px;
+    }
+
+    section {
+      margin-bottom: 40px;
+    }
+    section h2 {
+      margin-top: 0;
+      color: #1e8e7e;
+    }
+
+    /* Slideshow styles */
+    .slideshow-container {
+      position: relative;
+      max-width: 600px;
+      margin: auto;
+    }
+    .slides {
+      display: none;
+    }
+    .slides img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 12px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.3s;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background: rgba(0,0,0,0.4);
+    }
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+    .dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .dot {
+      cursor: pointer;
+      height: 12px;
+      width: 12px;
+      margin: 0 4px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+    .active, .dot:hover {
+      background-color: #717171;
+    }
+
+    /* Courses cards */
+    .courses-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .course-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .course-card h3 {
+      margin-top: 0;
+      color: #0b84ff;
+    }
+    .course-card p {
+      margin: 10px 0;
+    }
+
+    /* Location map */
+    .location {
+      text-align: center;
+    }
+    .location iframe {
+      width: 70%;
+      height: 300px;
+      border: 0;
+      border-radius: 8px;
+      display: inline-block;
+    }
+
+    /* Contact form */
+    .contact-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .contact-form {
+      flex: 1;
+      min-width: 300px;
+      max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .contact-form button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      background-color: #0b84ff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .contact-form button:hover {
+      background-color: #0066cc;
+    }
+
+    .contact-details {
+      flex: 1;
+      min-width: 300px;
+      max-width: 400px;
+      background: #f1f1f1;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    footer {
+  background-color: #1e8e7e;
+  color: white;
+  padding: 40px 20px 20px 20px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 1000px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.footer-about, .footer-location {
+  flex: 1;
+  min-width: 300px;
+}
+
+.footer-about h3, .footer-location h3 {
+  color: white;
+  margin-top: 0;
+}
+
+.footer-location iframe {
+  width: 100%;
+  height: 250px;
+  border: 0;
+  border-radius: 8px;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  padding-top: 10px;
+  font-size: 14px;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1><img src="./Pictures/logo.jpg" alt="Plexus CPR Logo">Plexus CPR</h1>
+    <nav>
+      <a href="#courses">Courses</a>
+      <a href="#register">Register</a>
+      <a href="#about">About Us</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#schedule">Follow Us s</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Learn. Save Lives. Get Certified.</h2>
+    <p>Join our Basic Life Support courses and gain the skills to act confidently in emergencies.</p>
+    <button class="btn btn-primary" onclick="location.href='#register'">Enroll Now</button>
+    <button class="btn btn-secondary" onclick="location.href='#courses'">View Courses</button>
+  </section>
+
+  <main>
+    <section id="welcome">
+      <h2>Welcome to Plexus CPR</h2>
+      <p>We provide certified Basic Life Support courses designed for healthcare professionals and anyone who wants to learn lifesaving CPR and AED skills.</p>
+    </section>
+
+    <section>
+      <h2>Mission Vision, and Core Values</h2>
+      <div class="courses-container">
+        <div class="course-card">
+          <h3>Mission</h3>
+          <p>Mission</p>
+        </div>
+        <div class="course-card">
+          <h3>Vision</h3>
+          <p>Vision</p>
+        </div>
+        <div class="course-card">
+          <h3>Core Values</h3>
+          <p>Core Values</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="courses">
+      <h2>Core Services</h2>
+      <div class="courses-container">
+        <div class="course-card">
+          <h3>Basic Life Support (BLS)</h3>
+          <p>Learn essential CPR and AED skills for healthcare professionals.</p>
+          <p>Duration: 4 hours</p>
+        </div>
+        <div class="course-card">
+          <h3>First Aid</h3>
+          <p>First Aid</p>
+          <p>Duration: 4 hours</p>
+        </div>
+        <div class="course-card">
+          <h3>ACLS</h3>
+          <p>CPR training designed for workplace or community members.</p>
+          <p>Duration: 2 days</p>
+        </div>
+        <div class="course-card">
+          <h3>PALS</h3>
+          <p>PALS.</p>
+          <p>Duration: 2 days</p>
+        </div>
+        <div class="course-card">
+          <h3>NRP</h3>
+          <p>NRP</p>
+          <p>Duration: 2 days</p>
+        </div>
+        <div class="course-card">
+          <h3>Corporate and Institutional Training Packages</h3>
+          <p>Corporate and Institutional Training Packages</p>
+          <p>Duration: 2 days</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <h2>Gallery</h2>
+      <div class="slideshow-container">
+        <div class="slides fade">
+          <img src="./Pictures/training1.jpg" alt="CPR training session">
+        </div>
+        <div class="slides fade">
+          <img src="./Pictures/training2.jpg" alt="Hands-on practice">
+        </div>
+        <div class="slides fade">
+          <img src="./Pictures/training3.jpg" alt="Instructor demonstration">
+        </div>
+        <div class="slides fade">
+          <img src="./Pictures/training4.jpg" alt="Team practice with manikins">
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+      <div class="dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+      </div>
+    </section>
+
+    <!--<section id="location">                                                                                                                                                                                                                                                                                                                                                                                                         -->
+    <!--  <h2>Our Location</h2>-->
+    <!--  <div class="location">-->
+    <!--    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3711.94798880875!2d39.2024506!3d21.509757099999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3cf73a988f13f%3A0xce27ceb1ad507e2e!2sPlexus%20CPR%20center!5e0!3m2!1sen!2ssa!4v1759492103602!5m2!1sen!2ssa" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+    <!--  </div>-->
+    <!--</section>-->
+
+     <!--<section id="about">-->
+      <!--<h2>About Us</h2>-->
+      <!--<p>Plexus CPR is committed to providing high-quality training in life-saving skills. Our certified instructors bring years of healthcare and emergency response experience to ensure every participant leaves confident and prepared to act in critical situations. We offer internationally recognized certification that is widely accepted by healthcare institutions and workplaces.</p>-->
+      <!--<p>Plexus CPR Center (PCC) is licensed by the Saudi Commission for Health Specialties and accreditted by the Saudi Heart Association Located at Emaar Square - Jeddah</p>-->
+    <!--</section>-->
+    
+    <section id = "followus">
+        <h2>Follow Us</h2>
+        <p>Stay updated with our social channels.</p>
+        <a href="https://www.instagram.com/plexus_cpr?igsh=d200cHZ5eHcydXA%3D">Instagram</a>
+        <a href="https://www.instagram.com/plexus_cpr?igsh=d200cHZ5eHcydXA%3D">Tiktok</a>
+        <!--<a href="https://www.instagram.com/plexus_cpr?igsh=d200cHZ5eHcydXA%3D">Email</a>-->
+    </section>
+    <!--<section id="contact">-->
+    <!--  <h2>Contact Us</h2>-->
+    <!--  <div class="contact-container">-->
+    <!--    <div class="contact-form">-->
+    <!--      <form action="#" method="post">-->
+    <!--        <input type="text" name="name" placeholder="Your Name" required>-->
+    <!--        <input type="email" name="email" placeholder="Your Email" required>-->
+    <!--        <input type="text" name="subject" placeholder="Subject" required>-->
+    <!--        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>-->
+    <!--        <button type="submit">Send Message</button>-->
+    <!--      </form>-->
+    <!--    </div>-->
+    <!--    <div class="contact-details">-->
+    <!--      <h3>Additional Details</h3>-->
+    <!--      <p>Phone: +9665XXXXXXXXX</p>-->
+    <!--      <p>Email: email</p>-->
+    <!--      <p>Address: Emaar Square, Al Sharm Street, Al Fayha'a, Jeddah 22241</p>-->
+    <!--      <p>Office Hours: Mon-Fri 9am - 5pm</p>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--</section>-->
+
+    <!-- Remove About Us and Location sections from main -->
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>About Us</h3>
+      <p>Plexus CPR is committed to providing high-quality training in life-saving skills. Our certified instructors bring years of healthcare and emergency response experience to ensure every participant leaves confident and prepared to act in critical situations. We offer internationally recognized certification that is widely accepted by healthcare institutions and workplaces.</p>
+      <p>Plexus CPR Center (PCC) is licensed by the Saudi Commission for Health Specialties and accredited by the Saudi Heart Association, located at Emaar Square - Jeddah.</p>
+    </div>
+    <div class="footer-contact">
+      <h3>Contact Us</h3>
+      <p>Phone: +9665XXXXXXXXX</p>
+      <p>Email: email</p>
+      <p>Address: Emaar Square, Al Sharm Street, Al Fayha'a, Jeddah 22241</p>
+      <p>Office Hours: Mon-Fri 9am - 5pm</p>
+    </div>
+    <div class="footer-location">
+      <h3>Our Location</h3>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3711.94798880875!2d39.2024506!3d21.509757099999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15c3cf73a988f13f%3A0xce27ceb1ad507e2e!2sPlexus%20CPR%20center!5e0!3m2!1sen!2ssa!4v1759492103602!5m2!1sen!2ssa" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Plexus CPR. All rights reserved.</p>
+  </div>
+</footer>
+  </main>
+
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("slides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+
+    setInterval(() => { plusSlides(1); }, 5000);
+  </script>
+</body>
+</html>
