@@ -112,44 +112,66 @@ nav a:hover {
   position: relative;
   text-align: center;
   padding: 140px 20px 100px;
-  padding: 100px 15px 80px;
-  background: url('./Pictures/background.jpg') center/cover no-repeat;
   color: white;
   overflow: hidden;
+  background-color: black;
 }
 
-.hero::before {
+.hero::before,
+.hero::after,
+.hero .bg-slide-2,
+.hero .bg-slide-3 {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: fadeSlideshow 16s infinite;
   z-index: 0;
+  transition: opacity 1s ease-in-out;
 }
 
+.hero::before {
+  background-image: url('./Pictures/background.jpg');
+  animation-delay: 12s;
+}
+
+.hero::after {
+  background-image: url('./Pictures/training2.jpg');
+  animation-delay: 12s;
+}
+
+.hero .bg-slide-2 {
+  background-image: url('./Pictures/training3.jpg');
+  animation-delay: 12s;
+}
+
+.hero .bg-slide-3 {
+  background-image: url('./Pictures/training4.jpg');
+  animation-delay: 12s;
+}
+
+@keyframes fadeSlideshow {
+  0%   { opacity: 0; }
+  25%  { opacity: 1; }
+  50%  { opacity: 1; }
+  75%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Ensure content stays on top */
 .hero h2,
 .hero p,
 .hero .btn {
   position: relative;
   z-index: 1;
   font-family: 'Poppins', sans-serif;
-}
-
-.hero h2 {
-  font-size: 44px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
   border-left: none;
 }
 
-.hero p {
-  font-size: 18px;
-  margin-bottom: 30px;
-  max-width: 600px;
-  margin-inline: auto;
-  font-weight: 400;
-  line-height: 1.7;
-}
+
 
 .btn {
   display: inline-block;
@@ -235,6 +257,20 @@ section h1, section h2 {
   font-weight: 400;
   line-height: 1.6;
 }
+
+.course-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: stransform 0.3s ease;
+}
+
+/* .course-card img:hover {
+  transform: scale(1.03);
+} */
 
 /* Slideshow */
 .slideshow-container {
@@ -322,6 +358,7 @@ footer {
   gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
+  align-items: start;
 }
 
 .footer-column h3 {
@@ -364,15 +401,16 @@ footer {
 
 /* Mobile Styles */
 @media (max-width: 820px) {
-  .hero{
+  .hero {
     padding: 80px 15px 60px;
   }
-  .hero h2{
+
+  .hero h2 {
     font-size: 28px;
   }
   
   .hero p {
-    font-size: 16px; /* smaller text */
+    font-size: 16px;
   }
 
   .btn {
@@ -387,14 +425,15 @@ footer {
   section h1, section h2 {
     font-size: 22px;
   }
-}
+
+  /* Show hamburger, hide full nav on mobile */
   .nav-toggle {
     display: block;
-    order: 2; /* Hamburger moves right */
+    order: 2; /* hamburger on right */
   }
 
   header h1 {
-    order: 1; /* Logo stays left */
+    order: 1; /* logo on left */
   }
 
   nav ul {
@@ -432,6 +471,49 @@ footer {
     opacity: 0.9;
   }
 }
+
+/* Desktop: always show nav, hide hamburger */
+@media (min-width: 821px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  nav ul {
+    display: flex;
+  }
+}
+
+/* Footer responsiveness */
+@media (max-width: 820px) {
+  .footer-container {
+    grid-template-columns: 1fr; /* stack vertically */
+    gap: 30px;
+    text-align: center;
+  }
+
+  .footer-column iframe {
+    height: 200px;
+  }
+
+  .footer-column h3 {
+    font-size: 18px;
+  }
+
+  .footer-column p,
+  .footer-column a {
+    font-size: 14px;
+  }
+
+  .social-links {
+    justify-content: center; /* center icons */
+  }
+
+  .social-links img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -447,10 +529,10 @@ footer {
     <li><a href="#courses">Courses</a></li>
     <!-- <li><a href="#register">Register</a></li> -->
     <li><a href="#gallery">Gallery</a></li>
-    <!-- <li><a href="#contact">Contact</a></li> -->
+    <li><a href="./facility.html">Our Facility</a></li>
     <!-- <li><a href="#schedule">Schedule</a></li> -->
     <li><a href="#followus">Follow Us</a></li>
-    <li><a href="#about">About Us</a></li>
+    <li><a href="./about.html">About Us</a></li>
   </ul>
 </nav>
 </header>
@@ -469,16 +551,47 @@ footer {
       <h2>Core Services</h2>
       <p>Our courses follow Saudi Heart Association Standards and are conducted by certified instructors using updated equipment and simulation-based training.</p>
       <div class="courses-container">
-        <div class="course-card"><h3>Basic Life Support (BLS)</h3><p>Basic Life Support (BLS) is a level of medical care used in emergencies to maintain breathing and circulation, typically involving CPR, use of an AED, and basic airway management until advanced help arrives.</p><p>Duration: 4 hours</p></div>
-        <div class="course-card"><h3>First Aid</h3><p>First aid is the immediate care given to a person who is injured or suddenly ill, aimed at preserving life, preventing the condition from worsening, and promoting recovery until professional medical help is available.</p><p>Duration: 4 hours</p></div>
-        <div class="course-card"><h3>Advanced Cardiovascular Life Support (ACLS)</h3><p>Advanced Cardiovascular Life Support (ACLS) is a set of clinical interventions for the urgent treatment of cardiac arrest, stroke, and other life-threatening cardiovascular emergencies, including advanced airway management, medication administration, and ECG interpretation, typically performed by trained healthcare professionals.</p><p>Duration: 2 days</p></div>
-        <div class="course-card"><h3>Pediatric Advanced Life Support (PALS)</h3><p>Pediatric Advanced Life Support (PALS) is a specialized training program that teaches healthcare providers how to respond to critically ill or injured infants and children using advanced assessment, life-saving interventions, and team-based resuscitation techniques.</p><p>Duration: 2 days</p></div>
-        <div class="course-card"><h3>Neontal Resuscitation Program (NLS)</h3><p>The Neonatal Resuscitation Program (NRP) is a training course that equips healthcare providers with the skills and knowledge to perform effective resuscitation on newborns immediately after birth, focusing on airway management, ventilation, and support of circulation.</p><p>Duration: 2 days</p></div>
-        <div class="course-card"><h3>Corporate Training</h3><p>Custom packages for companies & institutions.</p><p>Duration: Flexible</p></div>
+        <div class="course-card"><img src="./Pictures/class-cpr.jpg">
+          <h3>Basic Life Support (BLS)</h3>
+          <p>Basic Life Support (BLS) is a level of medical care used in emergencies to maintain breathing and circulation, 
+            typically involving CPR, use of an AED, and basic airway management until advanced help arrives.</p>
+            <p>Duration: 4 hours</p>
+          <button class="btn btn-primary" onclick="window.location.href='./class-cpr.html'">Enroll</button></div>
+
+        <div class="course-card"><img src="./Pictures/logo.jpg">
+          <h3>First Aid</h3><p>First aid is the immediate care given to a person who is injured or suddenly ill, aimed at preserving life, 
+            preventing the condition from worsening, and promoting recovery until professional medical help is available.</p>
+            <p>Duration: 4 hours</p>
+          <button class="btn btn-primary" onclick="window.location.href='./class-firstaid.html'">Enroll</button></div>
+
+        <div class="course-card"><img src="./Pictures/logo.jpg">
+          <h3>Advanced Cardiovascular Life Support (ACLS)</h3><p>Advanced Cardiovascular Life Support (ACLS) is a set of clinical interventions for the urgent treatment of cardiac arrest, 
+            stroke, and other life-threatening cardiovascular emergencies, including advanced airway management, 
+            medication administration, and ECG interpretation, typically performed by trained healthcare professionals.</p>
+            <p>Duration: 2 days</p>
+          <button class="btn btn-primary" onclick="window.location.href='./class-acls.html'">Enroll</button></div>
+
+        <div class="course-card"><img src="./Pictures/class-pals.jpg">
+          <h3>Pediatric Advanced Life Support (PALS)</h3><p>Pediatric Advanced Life Support (PALS) is a specialized training program that teaches healthcare 
+            providers how to respond to critically ill or injured infants and children using advanced assessment, life-saving interventions, and team-based 
+            resuscitation techniques.</p>
+            <p>Duration: 2 days</p>
+            <button class="btn btn-primary" onclick="window.location.href='./class-pals.html'">Enroll</button></div>
+
+        <div class="course-card"><img src="./Pictures/logo.jpg">
+          <h3>Neontal Resuscitation Program (NRP)</h3><p>The Neonatal Resuscitation Program (NRP) is a training course that 
+            equips healthcare providers with the skills and knowledge to perform effective resuscitation on newborns immediately after birth, 
+            focusing on airway management, ventilation, and support of circulation.</p>
+            <p>Duration: 2 days</p>
+          <button class="btn btn-primary" onclick="window.location.href='./class-nrp.html'">Enroll</button></div>
+
+        <div class="course-card"><img src="./Pictures/logo.jpg">
+          <h3>Corporate Training</h3><p>Custom packages for companies & institutions.</p><p>Duration: Flexible</p>
+        <button class="btn btn-primary" onclick="window.location.href='./class-corporatetraining.html'">Enroll</button></div></div>
       </div>
     </section>
 
-    <section>
+    <!-- <section>
       <h2>Mission and Vision</h2>
       <div class="courses-container">
         <div class="course-card"><h3>Mission</h3>
@@ -491,11 +604,11 @@ footer {
           </p></div>
         <div class="course-card"><h3>Vision</h3><p>To become a leading center for life-saving 
           education and healthcare excellence, fostering a safer and healthier community through training, collaboration, and innovation.</p></div>
-        <!-- <div class="course-card"><h3>Core Values</h3><p>Core Values text here</p></div> -->
+         <div class="course-card"><h3>Core Values</h3><p>Core Values text here</p></div> 
       </div>
-    </section>
+    </section> -->
 
-    <section id="Facility">
+    <!-- <section id="Facility">
       <h2> Our Facilities</h2>
       <ul>
         <li>Centrally located building with easy access and visibility.</li>
@@ -504,7 +617,7 @@ footer {
         <li>Dedicated rental office suites and medical clinic units.</li>
         <li>Spacious reception and waiting areas for comfort and convenience.</li>
       </ul>
-    </section>
+    </section> -->
 
     <section id="collab">
       <h2>Collaboration and Partnership</h2>
@@ -569,13 +682,6 @@ footer {
       <h3>About Us</h3>
       <p>Plexus CPR is a premier provider of Life Support Training Programs designed to equip individuals, professionals, and organizations with the essential knowledge and skills to respond effectively during medical emergencies. 
         We have the Saudi Commission for Health Specialties (SCFHS) license number 4/90105 and Commercial Registration Certificate number 7010996499 from Ministry of Commerce under Al-Salama Training Center Company.
-        <div class="social-links">
-        <a href="https://www.tiktok.com/@plexus_cpr" target="_blank"><img src="./Pictures/tiktok_logo.png" alt="TikTok"></a>
-        <a href="https://www.instagram.com/plexus_cpr" target="_blank"><img src="./Pictures/instagram_logo.png" alt="Instagram"></a>
-        <a href="https://www.linkedin.com/company/plexus-sa" target="_blank"><img src="./Pictures/linkedin_logo.png" alt="LinkedIn"></a>
-        <a href="https://www.x.com/Plexus_cpr" target="_blank"><img src="./Pictures/Xlogo.png" alt="Twitter"></a>
-        <a href="https://wa.me/966556330600?text=I%27m%20interested%20in%20your%20services%20" target="_blank"><img src="./Pictures/whatsapp_logo.png" alt="Whatsapp"></a>
-      </div>
       </p>
     </div>
     <div class="footer-column">
@@ -583,6 +689,13 @@ footer {
       <p>Email: Cpr.admin@plexus.sa</p>
       <p>Phone: +966 556 330 600</p>
       <p>Address: Emaar Square, Al Sharm Street, Al Fayha'a, Jeddah 22241</p>
+      <div class="social-links">
+        <a href="https://www.tiktok.com/@plexus_cpr" target="_blank"><img src="./Pictures/tiktok_logo.png" alt="TikTok"></a>
+        <a href="https://www.instagram.com/plexus_cpr" target="_blank"><img src="./Pictures/instagram_logo.png" alt="Instagram"></a>
+        <a href="https://www.linkedin.com/company/plexus-sa" target="_blank"><img src="./Pictures/linkedin_logo.png" alt="LinkedIn"></a>
+        <a href="https://www.x.com/Plexus_cpr" target="_blank"><img src="./Pictures/Xlogo.png" alt="Twitter"></a>
+        <a href="https://wa.me/966556330600?text=I%27m%20interested%20in%20your%20services%20" target="_blank"><img src="./Pictures/whatsapp_logo.png" alt="Whatsapp"></a>
+      </div>
     </div>
 
     <div class="footer-column">
