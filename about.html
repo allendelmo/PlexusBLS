@@ -578,5 +578,37 @@ footer {
     <p>&copy;2025 Plexus CPR. All rights reserved.</p>
   </div>
 </footer>
+
+    <script>
+        // Mobile nav toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const navList = document.getElementById('nav-list');
+
+    if (!toggle || !navList) return;
+
+    // Open/close menu
+    toggle.addEventListener('click', () => {
+      const isOpen = navList.classList.toggle('show');
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close menu when clicking a link
+    navList.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') {
+        navList.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Hide menu if window resized to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 820 && navList.classList.contains('show')) {
+        navList.classList.remove('show');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+    </script>
     </body>
 </html>
