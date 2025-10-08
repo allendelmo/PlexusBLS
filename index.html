@@ -117,10 +117,27 @@ nav a:hover {
   background-color: black;
 }
 
+.hero {
+  position: relative;
+  width: 100%;
+  height: 30vh;
+  overflow: hidden;
+}
+
+/* Common styles for all slides */
 .hero::before,
 .hero::after,
+.hero .bg-slide-1,
 .hero .bg-slide-2,
-.hero .bg-slide-3 {
+.hero .bg-slide-3,
+.hero .bg-slide-4,
+.hero .bg-slide-5,
+.hero .bg-slide-6,
+.hero .bg-slide-7,
+.hero .bg-slide-8,
+.hero .bg-slide-9,
+.hero .bg-slide-10,
+.hero .bg-slide-11 {
   content: "";
   position: absolute;
   inset: 0;
@@ -128,38 +145,32 @@ nav a:hover {
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
-  animation: fadeSlideshow 16s infinite;
+  animation: fadeSlideshow 33s infinite;
   z-index: 0;
   transition: opacity 1s ease-in-out;
 }
 
-.hero::before {
-  background-image: url('./Pictures/background.jpg');
-  animation-delay: 12s;
-}
-
-.hero::after {
-  background-image: url('./Pictures/training2.jpg');
-  animation-delay: 12s;
-}
-
-.hero .bg-slide-2 {
-  background-image: url('./Pictures/training3.jpg');
-  animation-delay: 12s;
-}
-
-.hero .bg-slide-3 {
-  background-image: url('./Pictures/training4.jpg');
-  animation-delay: 12s;
-}
+/* Slides with proper delays */
+.hero::before { background-image: url('./Pictures/1.jpg'); animation-delay: 0s; }
+.hero::after  { background-image: url('./Pictures/2.jpg'); animation-delay: 3s; }
+.hero .bg-slide-1 { background-image: url('./Pictures/3.jpg');  animation-delay: 6s; }
+.hero .bg-slide-2 { background-image: url('./Pictures/4.jpg');  animation-delay: 9s; }
+.hero .bg-slide-3 { background-image: url('./Pictures/5.jpg');  animation-delay: 12s; }
+.hero .bg-slide-4 { background-image: url('./Pictures/6.jpg');  animation-delay: 15s; }
+.hero .bg-slide-5 { background-image: url('./Pictures/7.jpg');  animation-delay: 18s; }
+.hero .bg-slide-6 { background-image: url('./Pictures/8.jpg');  animation-delay: 21s; }
+.hero .bg-slide-7 { background-image: url('./Pictures/9.jpg');  animation-delay: 24s; }
+.hero .bg-slide-8 { background-image: url('./Pictures/10.jpg'); animation-delay: 27s; }
+.hero .bg-slide-9 { background-image: url('./Pictures/11.jpg'); animation-delay: 30s; }
 
 @keyframes fadeSlideshow {
-  0%   { opacity: 0; }
-  25%  { opacity: 1; }
-  50%  { opacity: 1; }
-  75%  { opacity: 0; }
+  0% { opacity: 0; }
+  2% { opacity: 1; }
+  9% { opacity: 1; }
+  11% { opacity: 0; }
   100% { opacity: 0; }
 }
+
 
 /* Ensure content stays on top */
 .hero h2,
@@ -536,15 +547,29 @@ footer {
   </ul>
 </nav>
 </header>
-  <section class="hero">
-    <section id="hero">
+  <section class="hero" id="hero">
+  <!-- Background Slides -->
+  <div class="bg-slide bg-slide-1"></div>
+  <div class="bg-slide bg-slide-2"></div>
+  <div class="bg-slide bg-slide-3"></div>
+  <div class="bg-slide bg-slide-4"></div>
+  <div class="bg-slide bg-slide-5"></div>
+  <div class="bg-slide bg-slide-6"></div>
+  <div class="bg-slide bg-slide-7"></div>
+  <div class="bg-slide bg-slide-8"></div>
+  <div class="bg-slide bg-slide-9"></div>
+  <div class="bg-slide bg-slide-10"></div>
+  <div class="bg-slide bg-slide-11"></div>
+
+  <!-- Text & Buttons -->
+  <div class="hero-content">
     <h2>Learn. Get Certified. Save Lives.</h2>
     <p>Join our Basic Life Support courses and gain the skills to act confidently in emergencies.</p>
     <button class="btn btn-primary" onclick="window.location.href='https://wa.me/966556330600?text=I%27m%20interested%20in%20your%20services%20'">Enroll now</button>
-    <!--<button class="btn btn-primary" onclick="location.href='#register'">Enroll Now</button>-->
     <button class="btn btn-secondary" onclick="location.href='#courses'">View Courses</button>
-    </section>
-  </section>
+  </div>
+</section>
+
 
   <main>
     <section id="courses">
@@ -558,34 +583,34 @@ footer {
             <p>Duration: 4 hours</p>
           <button class="btn btn-primary" onclick="window.location.href='./class-cpr.html'">Enroll</button></div>
 
-        <div class="course-card"><img src="./Pictures/logo.jpg">
+        <div class="course-card"><img src="./Pictures/first_aid.jpg">
           <h3>First Aid</h3><p>First aid is the immediate care given to a person who is injured or suddenly ill, aimed at preserving life, 
             preventing the condition from worsening, and promoting recovery until professional medical help is available.</p>
             <p>Duration: 4 hours</p>
           <button class="btn btn-primary" onclick="window.location.href='./class-firstaid.html'">Enroll</button></div>
 
-        <div class="course-card"><img src="./Pictures/logo.jpg">
+        <div class="course-card"><img src="./Pictures/ACLS.jpg">
           <h3>Advanced Cardiovascular Life Support (ACLS)</h3><p>Advanced Cardiovascular Life Support (ACLS) is a set of clinical interventions for the urgent treatment of cardiac arrest, 
             stroke, and other life-threatening cardiovascular emergencies, including advanced airway management, 
             medication administration, and ECG interpretation, typically performed by trained healthcare professionals.</p>
             <p>Duration: 2 days</p>
           <button class="btn btn-primary" onclick="window.location.href='./class-acls.html'">Enroll</button></div>
 
-        <div class="course-card"><img src="./Pictures/class-pals.jpg">
+        <div class="course-card"><img src="./Pictures/PALS.jpg">
           <h3>Pediatric Advanced Life Support (PALS)</h3><p>Pediatric Advanced Life Support (PALS) is a specialized training program that teaches healthcare 
             providers how to respond to critically ill or injured infants and children using advanced assessment, life-saving interventions, and team-based 
             resuscitation techniques.</p>
             <p>Duration: 2 days</p>
             <button class="btn btn-primary" onclick="window.location.href='./class-pals.html'">Enroll</button></div>
 
-        <div class="course-card"><img src="./Pictures/logo.jpg">
+        <div class="course-card"><img src="./Pictures/NRP.jpg">
           <h3>Neontal Resuscitation Program (NRP)</h3><p>The Neonatal Resuscitation Program (NRP) is a training course that 
             equips healthcare providers with the skills and knowledge to perform effective resuscitation on newborns immediately after birth, 
             focusing on airway management, ventilation, and support of circulation.</p>
             <p>Duration: 2 days</p>
           <button class="btn btn-primary" onclick="window.location.href='./class-nrp.html'">Enroll</button></div>
 
-        <div class="course-card"><img src="./Pictures/logo.jpg">
+        <div class="course-card"><img src="./Pictures/Corporate Training.jpg">
           <h3>Corporate Training</h3><p>Custom packages for companies & institutions.</p><p>Duration: Flexible</p>
         <button class="btn btn-primary" onclick="window.location.href='./class-corporatetraining.html'">Enroll</button></div></div>
       </div>
