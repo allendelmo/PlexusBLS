@@ -127,14 +127,14 @@ nav a:hover {
 /* Common styles for all slides */
 .hero::before,
 .hero::after,
-.hero .bg-slide-1,
+/* .hero .bg-slide-1, */
 .hero .bg-slide-2,
 .hero .bg-slide-3,
 .hero .bg-slide-4,
 .hero .bg-slide-5,
 .hero .bg-slide-6,
-.hero .bg-slide-7,
-.hero .bg-slide-8,
+/* .hero .bg-slide-7,
+.hero .bg-slide-8, */
 .hero .bg-slide-9,
 .hero .bg-slide-10,
 .hero .bg-slide-11 {
@@ -145,31 +145,32 @@ nav a:hover {
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
-  animation: fadeSlideshow 33s infinite;
+  animation: fadeSlideshow 18s infinite;
   z-index: 0;
   transition: opacity 1s ease-in-out;
 }
 
 /* Slides with proper delays */
-.hero::before { background-image: url('./Pictures/1.jpg'); animation-delay: 0s; }
+.hero::before { background-image: url('./Pictures/1.jpg'); animation-delay: 0s; background-position: center top; }
 .hero::after  { background-image: url('./Pictures/2.jpg'); animation-delay: 3s; }
-.hero .bg-slide-1 { background-image: url('./Pictures/3.jpg');  animation-delay: 6s; }
-.hero .bg-slide-2 { background-image: url('./Pictures/4.jpg');  animation-delay: 9s; }
-.hero .bg-slide-3 { background-image: url('./Pictures/5.jpg');  animation-delay: 12s; }
-.hero .bg-slide-4 { background-image: url('./Pictures/6.jpg');  animation-delay: 15s; }
-.hero .bg-slide-5 { background-image: url('./Pictures/7.jpg');  animation-delay: 18s; }
-.hero .bg-slide-6 { background-image: url('./Pictures/8.jpg');  animation-delay: 21s; }
-.hero .bg-slide-7 { background-image: url('./Pictures/9.jpg');  animation-delay: 24s; }
-.hero .bg-slide-8 { background-image: url('./Pictures/10.jpg'); animation-delay: 27s; }
-.hero .bg-slide-9 { background-image: url('./Pictures/11.jpg'); animation-delay: 30s; }
+/* .hero .bg-slide-1 { background-image: url('./Pictures/3.jpg');  animation-delay: 6s; } */
+.hero .bg-slide-2 { background-image: url('./Pictures/4.jpg');  animation-delay: 6s; }
+.hero .bg-slide-3 { background-image: url('./Pictures/5.jpg');  animation-delay: 9s; background-position: center 35%;}
+.hero .bg-slide-4 { background-image: url('./Pictures/6.jpg');  animation-delay: 12s; }
+.hero .bg-slide-5 { background-image: url('./Pictures/7.jpg');  animation-delay: 15s; background-position: center 10%; }
+.hero .bg-slide-6 { background-image: url('./Pictures/8.jpg');  animation-delay: 18s; }
+/* .hero .bg-slide-7 { background-image: url('./Pictures/9.jpg');  animation-delay: 24s; } */
+/* .hero .bg-slide-8 { background-image: url('./Pictures/10.jpg'); animation-delay: 27s; } */
+/* .hero .bg-slide-9 { background-image: url('./Pictures/11.jpg'); animation-delay: 21s; } */
 
 @keyframes fadeSlideshow {
-  0% { opacity: 0; }
-  2% { opacity: 1; }
-  9% { opacity: 1; }
-  11% { opacity: 0; }
+  0%   { opacity: 0; }
+  2%   { opacity: 1; }   /* Fade in quickly */
+  16%  { opacity: 1; }   /* Stay visible longer */
+  18%  { opacity: 0; }   /* Fade out right before next */
   100% { opacity: 0; }
 }
+
 
 
 /* Ensure content stays on top */
@@ -286,16 +287,26 @@ section h1, section h2 {
 /* Slideshow */
 .slideshow-container {
   position: relative;
-  max-width: 700px;
+  max-width: 1000px;
   margin: auto;
 }
 
 .slides img {
   width: 100%;
-  height: 380px;
+  height: 500px;
   object-fit: cover;
   border-radius: 10px;
 }
+
+.slides:nth-child(1) img { object-position: center; }       
+.slides:nth-child(2) img { object-position: center; }       
+.slides:nth-child(3) img { object-position: center 80%; }   
+.slides:nth-child(4) img { object-position: center 70%; }   
+.slides:nth-child(5) img { object-position: center 40%; }   
+.slides:nth-child(6) img { object-position: center 80%; }    
+.slides:nth-child(7) img { object-position: center 80%; } 
+.slides:nth-child(8) img { object-position: center 10%; }    
+
 
 .prev, .next {
   cursor: pointer;
@@ -335,6 +346,25 @@ section h1, section h2 {
 .dot.active, .dot:hover {
   background-color: var(--accent);
 }
+
+.fullscreen {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 6px 10px;
+  border-radius: 6px;
+  z-index: 10;
+  transition: background 0.3s;
+}
+
+.fullscreen:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
 
 /* Social Links */
 .social-links {
@@ -499,7 +529,7 @@ footer {
   .footer-container {
     grid-template-columns: 1fr; /* stack vertically */
     gap: 30px;
-    text-align: center;
+    text-align: left;
   }
 
   .footer-column iframe {
@@ -516,7 +546,7 @@ footer {
   }
 
   .social-links {
-    justify-content: center; /* center icons */
+    justify-content: left;
   }
 
   .social-links img {
@@ -536,19 +566,18 @@ footer {
   <button class="nav-toggle" aria-label="Toggle Navigation" aria-expanded="false">☰</button>
     <nav>
   <ul id="nav-list" class="nav-list">
-    <li><a href="#welcome">Home</a></li>
+    <li><a href="#hero">Home</a></li>
     <li><a href="#courses">Courses</a></li>
     <!-- <li><a href="#register">Register</a></li> -->
-    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#gallery">Gallery</a></li> 
     <li><a href="./facility.html">Our Facility</a></li>
     <!-- <li><a href="#schedule">Schedule</a></li> -->
-    <li><a href="#followus">Follow Us</a></li>
+    <!-- <li><a href="#followus">Follow Us</a></li> -->
     <li><a href="./about.html">About Us</a></li>
   </ul>
 </nav>
 </header>
   <section class="hero" id="hero">
-  <!-- Background Slides -->
   <div class="bg-slide bg-slide-1"></div>
   <div class="bg-slide bg-slide-2"></div>
   <div class="bg-slide bg-slide-3"></div>
@@ -580,39 +609,39 @@ footer {
           <h3>Basic Life Support (BLS)</h3>
           <p>Basic Life Support (BLS) is a level of medical care used in emergencies to maintain breathing and circulation, 
             typically involving CPR, use of an AED, and basic airway management until advanced help arrives.</p>
-            <p>Duration: 4 hours</p>
+            <p>Duration: 4 hour(s)</p>
           <button class="btn btn-primary" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLScpDRs4eQKkQrJD_xNOTYbPotE9HrYZ1DIksaTDoqkQssCrJQ/viewform'">Enroll</button></div>
 
         <div class="course-card"><img src="./Pictures/first_aid.jpg">
-          <h3>First Aid</h3><p>First aid is the immediate care given to a person who is injured or suddenly ill, aimed at preserving life, 
+          <h3>HeartSaver First Aid (HSFA)</h3><p>HeartSaver First Aid (HSFA) is the immediate care given to a person who is injured or suddenly ill, aimed at preserving life, 
             preventing the condition from worsening, and promoting recovery until professional medical help is available.</p>
-            <p>Duration: 4 hours</p>
+            <p>Duration: 4 hour(s)</p>
           <button class="btn btn-primary" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSfKR6yoWCEbMsCT4h6cB4UA2JzDQXPSQKIv38kZ_xGhmKlRWQ/viewform'">Enroll</button></div>
 
         <div class="course-card"><img src="./Pictures/ACLS.jpg">
           <h3>Advanced Cardiovascular Life Support (ACLS)</h3><p>Advanced Cardiovascular Life Support (ACLS) is a set of clinical interventions for the urgent treatment of cardiac arrest, 
             stroke, and other life-threatening cardiovascular emergencies, including advanced airway management, 
             medication administration, and ECG interpretation, typically performed by trained healthcare professionals.</p>
-            <p>Duration: 2 days</p>
+            <p>Duration: 2 day(s)</p>
           <button class="btn btn-primary" onclick="window.location.href='./class-acls.html'">Enroll</button></div>
 
         <div class="course-card"><img src="./Pictures/PALS.jpg">
           <h3>Pediatric Advanced Life Support (PALS)</h3><p>Pediatric Advanced Life Support (PALS) is a specialized training program that teaches healthcare 
             providers how to respond to critically ill or injured infants and children using advanced assessment, life-saving interventions, and team-based 
             resuscitation techniques.</p>
-            <p>Duration: 2 days</p>
+            <p>Duration: 2 day(s)</p>
             <button class="btn btn-primary" onclick="window.location.href='./class-pals.html'">Enroll</button></div>
 
         <div class="course-card"><img src="./Pictures/NRP.jpg">
-          <h3>Neontal Resuscitation Program (NRP)</h3><p>The Neonatal Resuscitation Program (NRP) is a training course that 
+          <h3>Neonatal Resuscitation Program (NRP)</h3><p>The Neonatal Resuscitation Program (NRP) is a training course that 
             equips healthcare providers with the skills and knowledge to perform effective resuscitation on newborns immediately after birth, 
             focusing on airway management, ventilation, and support of circulation.</p>
-            <p>Duration: 2 days</p>
+            <p>Duration: 1 day(s)</p>
           <button class="btn btn-primary" onclick="window.location.href='./class-nrp.html'">Enroll</button></div>
 
-        <div class="course-card"><img src="./Pictures/Corporate Training.jpg">
-          <h3>Corporate Training</h3><p>Custom packages for companies & institutions.</p><p>Duration: Flexible</p>
-        <button class="btn btn-primary" onclick="window.location.href='https://wa.me/966556330600?text=I%27m%20interested%20in%20corporate%20training%20services%20'">For Registration</button></div></div>
+        <div class="course-card"><img src="./Pictures/Medical_Consultation.jpg">
+          <h3>Space for Rent</h3><p>Book a space for your Medical Consultations — Healthcare/Medical Clinic rentals are available here.</p><p>Duration: Flexible</p>
+        <button class="btn btn-primary" onclick="window.location.href='https://wa.me/966556330600?text=I%27m%20interested%20in%20your%20medical%20consultations%20'">For Registration</button></div></div>
       </div>
     </section>
 
@@ -678,15 +707,25 @@ footer {
         <div class="slides"><img src="./Pictures/training2.jpg" alt="Hands-on practice"></div>
         <div class="slides"><img src="./Pictures/training3.jpg" alt="Instructor demonstration"></div>
         <div class="slides"><img src="./Pictures/training4.jpg" alt="Team practice"></div>
+        <div class="slides"><img src="./Pictures/1.jpg" alt="Team practice"></div>
+        <div class="slides"><img src="./Pictures/9.jpg" alt="Team practice"></div>
+        <div class="slides"><img src="./Pictures/10.jpg" alt="Team practice"></div>
+        <!-- <div class="slides"><img src="./Pictures/11.jpg" alt="Team practice"></div> -->
 
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        
       </div>
       <div class="dots">
         <span class="dot" onclick="currentSlide(1)"></span>
         <span class="dot" onclick="currentSlide(2)"></span>
         <span class="dot" onclick="currentSlide(3)"></span>
         <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+        <span class="dot" onclick="currentSlide(6)"></span>
+        <span class="dot" onclick="currentSlide(7)"></span>
+        <!-- <span class="dot" onclick="currentSlide(8)"></span> -->
+
       </div>
     </section>
 
@@ -757,6 +796,17 @@ footer {
       dots[slideIndex - 1].classList.add("active");
     }
     setInterval(() => plusSlides(1), 5000);
+    
+    function slideshowOpenFullscreen() {
+    const elem = document.querySelector(".slideshow-container");
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  }
 
 
     
