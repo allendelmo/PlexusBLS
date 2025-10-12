@@ -143,9 +143,9 @@ body {
     }
 
     /* الخلفيات المتحركة */
-    .hero::before,
-    .hero::after,
-    /* .hero .bg-slide-1, */      /* مُعطّلة مثل نسختك */
+    /* .hero::before,
+    .hero::after, */
+    .hero .bg-slide-1, 
     .hero .bg-slide-2,
     .hero .bg-slide-3,
     .hero .bg-slide-4,
@@ -168,15 +168,23 @@ body {
       transition: opacity 1s ease-in-out;
     }
 
+    .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2); /* Adjust darkness here */
+    z-index: 0; /* Place above images, below content */
+    pointer-events: none;
+    }
     /* ترتيب التأخير لكل شريحة (مطابق لتعديلاتك) */
-    .hero::before { background-image: url('./Pictures/1.jpg'); animation-delay: 0s; background-position: center top; }
-    .hero::after  { background-image: url('./Pictures/2.jpg'); animation-delay: 3s; }
+    .hero .bg-slide-1 { background-image: url('./Pictures/1.jpg'); animation-delay: 0s; background-position: center top; }
+    .hero .bg-slide-2  { background-image: url('./Pictures/2.jpg'); animation-delay: 3s; }
     /* .hero .bg-slide-1 { background-image: url('./Pictures/3.jpg');  animation-delay: 6s; } */
-    .hero .bg-slide-2 { background-image: url('./Pictures/4.jpg');  animation-delay: 6s; }
-    .hero .bg-slide-3 { background-image: url('./Pictures/5.jpg');  animation-delay: 9s; background-position: center 35%;}
-    .hero .bg-slide-4 { background-image: url('./Pictures/6.jpg');  animation-delay: 12s; }
-    .hero .bg-slide-5 { background-image: url('./Pictures/7.jpg');  animation-delay: 15s; background-position: center 10%; }
-    .hero .bg-slide-6 { background-image: url('./Pictures/8.jpg');  animation-delay: 18s; }
+    .hero .bg-slide-3 { background-image: url('./Pictures/4.jpg');  animation-delay: 6s; }
+    .hero .bg-slide-4 { background-image: url('./Pictures/5.jpg');  animation-delay: 9s; background-position: center 35%;}
+    .hero .bg-slide-5 { background-image: url('./Pictures/6.jpg');  animation-delay: 12s; }
+    .hero .bg-slide-6 { background-image: url('./Pictures/7.jpg');  animation-delay: 15s; background-position: center 10%; }
+    .hero .bg-slide-7 { background-image: url('./Pictures/8.jpg');  animation-delay: 18s; }
     /* .hero .bg-slide-7 { background-image: url('./Pictures/9.jpg');  animation-delay: 24s; } */
     /* .hero .bg-slide-8 { background-image: url('./Pictures/10.jpg'); animation-delay: 27s; } */
     /* .hero .bg-slide-9 { background-image: url('./Pictures/11.jpg'); animation-delay: 21s; } */
