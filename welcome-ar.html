@@ -65,7 +65,8 @@ body {
       color: var(--primary);
       z-index: 1000;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      flex-direction: row-reverse; /* يعكس الترتيب */
+      /* flex-direction: row-reverse; يعكس الترتيب */
+      flex-direction: row;
     }
 
     header h1 {
@@ -75,11 +76,13 @@ body {
       margin: 0;
       font-weight: 700;
       font-size: 24px;
+      order: 1;
     }
 
     header img {
       height: 60px;
       transition: transform 0.3s ease;
+      /* align-items: left; */
       margin-top: 5px;
     }
 
@@ -89,6 +92,7 @@ body {
       font-size: 22px;
       font-weight: 700;
       letter-spacing: .5px;
+      font-family: 'Poppins', sans-serif;
     }
 
     /* Navigation */
@@ -106,6 +110,7 @@ body {
       font-weight: 600;
       letter-spacing: 0.3px;
       transition: opacity 0.3s ease;
+      order: 2;
     }
 
     nav a:hover {
@@ -122,6 +127,7 @@ body {
       color: var(--primary);
       cursor: pointer;
       z-index: 1100;
+      order: 3;
     }
 
     /* Hero Section (خلفية عرض شرائح) */
@@ -495,8 +501,10 @@ body {
 <body>
   <header>
     <h1>
+      <!-- <a href="#hero"><img src="./Pictures/logo1.png" alt="شعار بلكسوس للإسعافات"></a> -->
+      <span class="brand">Plexus CPR</span>
       <a href="#hero"><img src="./Pictures/logo1.png" alt="شعار بلكسوس للإسعافات"></a>
-      <span class="brand">بلكسوس للإسعافات</span>
+      <!-- <span class="brand">بلكسوس للإسعافات</span> -->
     </h1>
     <button class="nav-toggle" aria-label="قائمة التنقل" aria-expanded="false">☰</button>
     <nav>
@@ -506,7 +514,7 @@ body {
         <li><a href="#gallery">المعرض</a></li>
         <li><a href="./facility-ar.html">مرافقنا</a></li>
         <li><a href="./about-ar.html">من نحن</a></li>
-        <li><a href="index.html">English</a></li>
+        <li><a href="welcome.html">English</a></li>
       </ul>
     </nav>
   </header>
@@ -527,8 +535,8 @@ body {
 
     <!-- نص وأزرار -->
     <div class="hero-content">
-      <h2>تعلّم. احصل على شهادة. أنقِذ الأرواح.</h2>
-      <p>انضم إلى دورات دعم الحياة واكتسب المهارات للتصرف بثقة في حالات الطوارئ.</p>
+      <h2 style="-webkit-text-stroke: 1px black;text-shadow: 2px 2px 4px rgba(0,0,0,0.8);font-weight: 700;">تعلّم. احصل على شهادة. أنقِذ الأرواح.</h2>
+      <p style="-webkit-text-stroke: 0.6px black;text-shadow: 1px 1px 3px rgba(0,0,0,0.8);font-weight: 500;">انضم إلى دورات دعم الحياة واكتسب المهارات للتصرف بثقة في حالات الطوارئ.</p>
       <button class="btn btn-primary" onclick="window.location.href='https://wa.me/966556330600?text=%D8%A3%D9%86%D8%A7%20%D9%85%D9%87%D8%AA%D9%85%20%D8%A8%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%D9%83%D9%85'">سجّل الآن</button>
       <button class="btn btn-secondary" onclick="location.href='#courses'">عرض الدورات</button>
     </div>
@@ -537,12 +545,12 @@ body {
   <main>
     <section id="courses">
       <h2>الخدمات الأساسية</h2>
-      <p>تلتزم دوراتنا بمعايير الجمعية السعودية للقلب ويقدّمها مدرّبون معتمدون باستخدام معدات محدّثة وتدريب قائم على المحاكاة.</p>
+      <p>تلتزم دوراتنا بمعايير الجمعية السعودية للقلب ويقدمها مدربون معتمدون بإستخدام معدات حديثة  وتدريب قائم على المحاكاة.</p>
       <div class="courses-container">
         <div class="course-card">
           <img src="./Pictures/class-cpr.jpg" alt="دورة دعم الحياة الأساسي">
           <h3>دعم الحياة الأساسي (BLS)</h3>
-          <p>مستوى من الرعاية الطبية يُستخدم في الطوارئ للحفاظ على التنفّس والدورة الدموية، ويشمل عادةً الإنعاش القلبي الرئوي، واستخدام جهاز الصدمات القلبية (AED)، وإدارة مجرى الهواء الأساسية حتى وصول المساعدة المتقدمة.</p>
+          <p>مستوى من الرعاية الطبية يُستخدم في الطوارئ للحفاظ على التنفّس والدورة الدموية، ويشمل عادةً الإنعاش القلبي الرئوي، واستخدام جهاز الصدمات القلبية (AED)، وإدارة مجرى الهواء الأساسي حتى وصول المساعدة المتقدمة.</p>
           <p>المدة: 4 ساعات</p>
           <button class="btn btn-primary" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLScpDRs4eQKkQrJD_xNOTYbPotE9HrYZ1DIksaTDoqkQssCrJQ/viewform'">سجّل</button>
         </div>
@@ -644,7 +652,7 @@ body {
       <div class="footer-column">
         <h3>تواصل معنا</h3>
         <p>البريد الإلكتروني: Cpr.admin@plexus.sa</p>
-        <p>الهاتف: +966 556 330 600</p>
+        <p>الهاتف: 600 330 556 966</p>
         <p>العنوان: مركز إعمار سكوير، شارع الشرم، حي الفيحاء، جدة 22241</p>
         <div class="social-links">
           <a href="https://www.tiktok.com/@plexus_cpr" target="_blank"><img src="./Pictures/tiktok_logo.png" alt="تيك توك"></a>
@@ -733,6 +741,38 @@ body {
         }
       });
     });
+
+    // --- Swipe support for mobile slideshow ---
+(function enableSwipe() {
+  const slideshow = document.querySelector(".slideshow-container");
+  if (!slideshow) return;
+
+  let startX = 0;
+  let endX = 0;
+  const threshold = 50; // minimum swipe distance in px
+
+  slideshow.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  slideshow.addEventListener("touchmove", (e) => {
+    endX = e.touches[0].clientX;
+  });
+
+  slideshow.addEventListener("touchend", () => {
+    const diff = endX - startX;
+
+    if (Math.abs(diff) > threshold) {
+      if (diff < 0) plusSlides(1);   // swipe left → next
+      else plusSlides(-1);           // swipe right → previous
+    }
+
+    // reset values
+    startX = 0;
+    endX = 0;
+  });
+})();
+
   </script>
 </body>
 </html>
