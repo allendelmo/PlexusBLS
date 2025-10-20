@@ -1,130 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plexus Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plexus Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      color: white;
-    }
+  body {
+    background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
 
-    .hub-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 40px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      animation: fadeIn 1s ease-in-out;
-    }
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #1e8e7e;
+  }
 
-    /* @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    } */
+  p {
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 40px;
+  }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 30px;
-      color: #ffffff;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-    }
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1100px;
+  }
 
-    .hub-container {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
-    }
+  .site-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+  }
 
-    .hub-button {
-      position: relative;
-      display: inline-block;
-      padding: 15px 35px;
-      font-size: 1rem;
-      font-weight: 500;
-      color: white;
-      background: linear-gradient(135deg, #60a5fa, #2563eb);
-      border: none;
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-      overflow: hidden;
-      cursor: pointer;
-    }
+  .site-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
 
-    .hub-button::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      border: 2px solid rgba(255, 255, 255, 0.15);
-      transition: border 0.3s;
-    }
+  .site-card h2 {
+    color: #1e8e7e;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
 
-    .hub-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
-    }
+  .site-card p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
 
-    .hub-button:hover::before {
-      border-color: rgba(255, 255, 255, 0.3);
-    }
+  .site-card a {
+    display: inline-block;
+    background: #1e8e7e;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
 
-    .coming-soon {
-      background: linear-gradient(135deg, #94a3b8, #64748b);
-      box-shadow: none;
-    }
+  .site-card button {
+    display: inline-block;
+    background: #1e8e7e;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
 
-    .coming-soon:hover {
-      transform: none;
-      box-shadow: none;
-    }
+  .site-card button:hover {
+    background: #15685f;
+  }
 
-    @media (max-width: 500px) {
-      .hub-card {
-        padding: 30px 20px;
-      }
+  .site-card a:hover {
+    background: #15685f;
+  }
 
-      .hub-button {
-        width: 100%;
-      }
-    }
-  </style>
+  footer {
+    margin-top: 60px;
+    font-size: 0.9rem;
+    color: #555;
+    opacity: 0.8;
+  }
+</style>
 </head>
 <body>
 
-  <div class="hub-card">
-    <h1>Plexus Hub Portal</h1>
-    <div class="hub-container">
-      <a href="./welcome.html" class="hub-button">Plexus CPR</a>
-      <button onclick="alert('Plexus CME is Coming Soon')" class="hub-button coming-soon">Plexus CME</button>
+  <h1>Plexus Hub</h1>
+  <p>Select a site to visit</p>
+
+  <div class="hub-grid">
+    <div class="site-card">
+      <h2>Plexus CPR</h2>
+      <p>Training and certification website for CPR and life support.</p>
+      <a href="plexus.html">Visit</a>
+    </div>
+
+    <div class="site-card">
+      <h2>Plexus CME</h2>
+      <p>Plexus CME add description here</p>
+      <button onclick="alert('Coming Soon')">Visit</button>
+      <!-- <a href="portfolio.html">Visit</a> -->
+    </div>
+
+    <div class="site-card">
+      <h2>Plexus Studio</h2>
+      <p>Plexus Studio Description here</p>
+      <button onclick="alert('Coming Soon')">Visit</button>
+    </div>
+
+     <div class="site-card">
+      <h2>Plexus Training</h2>
+      <p>Training Facility description here</p>
+      <button onclick="alert('Coming Soon')">Visit</button>
+      <!-- <a href="contact.html">Visit</a> -->
+    </div>
+
+    <div class="site-card">
+      <h2>Plexus Events</h2>
+      <p>Plexus Events</p>
+      <button onclick="alert('Coming Soon')">Visit</button>
+      <!-- <a href="dental.html">Visit</a> -->
+    </div>
+
+    <div class="site-card">
+      <h2>Contact Us</h2>
+      <p>Contact us for more</p>
+      <button onclick="alert('Coming Soon')">Visit</button>
+      <!-- <a href="order.html">Visit</a> -->
+    </div>
+
+    <div class="site-card">
+      <h2>Plexus Co-working space</h2>
+      <p>Plexus Co-working space</p>
+      <button onclick="alert('Coming Soon')">Visit</button>
+      <!-- <a href="bls.html">Visit</a> -->
+    </div>
+
+    <div class="site-card">
+      <h2>Plexus Incubator</h2>
+      <p>Plexus Incubator</p>
+      <button onclick="alert('Coming Soon')">Visit</button>
+      <!-- <a href="#">Current</a> -->
     </div>
   </div>
+
+  <footer><p>&copy;2025 Plexus. All rights reserved.</p></footer>
+
 </body>
 </html>
