@@ -1,177 +1,747 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Plexus Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Plexus Health</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+:root {
+  --primary: #1e8e7e;
+  --accent: #0b84ff;
+  --bg-light: #f9f9f9;
+  --text-dark: #222;
+  --gap: 40px;
+}
 
-  body {
-    background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
-    color: #222;
-    display: flex;
+/* ---------- BASE ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+/* ---------- HEADER ---------- */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 70px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+header h1 {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+nav a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s, transform 0.3s;
+}
+nav a:hover { color: var(--accent); transform: translateY(-2px); }
+
+/* ---------- DROPDOWN ---------- */
+.dropdown { position: relative; z-index: 2000; }
+.dropdown > a { cursor: pointer; }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0;
+  background: #fff;
+  min-width: 200px;
+  border-radius: 8px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  overflow: hidden;
+  z-index: 2001;
+}
+.dropdown-content a {
+  display: block;
+  padding: 10px 16px;
+  color: var(--primary);
+  text-decoration: none;
+  transition: background 0.3s;
+}
+.dropdown-content a:hover { background: var(--accent); color: #fff; }
+
+@media (min-width: 901px) {
+  .dropdown:hover .dropdown-content,
+  .dropdown.open .dropdown-content { display: block; }
+}
+
+/* ---------- MOBILE NAV ---------- */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  width: 30px; height: 30px;
+  gap: 5px;
+}
+.menu-toggle span {
+  height: 3px;
+  background: var(--primary);
+  width: 100%;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+@media (max-width: 900px) {
+  .menu-toggle { display: flex; }
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px; left: 0; right: 0;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px 0;
+    text-align: center;
+    z-index: 999;
+  }
+  nav ul.show { display: flex; }
+  nav ul li { margin: 12px 0; }
+}
+
+/* ---------- HERO ---------- */
+/* ---------- HERO (Modern Layout, box at bottom) ---------- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.15) 20%, rgba(255,255,255,0.75) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.25) 10%, rgba(0,0,0,0.1) 40%, rgba(255,255,255,0.8) 100%),
+    url('./Pictures/background1.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* push content to bottom */
+  color: #fff;
+  overflow: hidden;
+  margin-top: -70px;
+}
+.hero::after {
+  content:"";
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:180px;
+  background:linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--bg-light) 100%);
+  z-index:1;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.1) 100%);
+  z-index: 1;
+}
+
+.hero-text {
+  position: absolute;
+  top: 40%;               /* centers vertically */
+  left: 8%;               /* moves it from the left edge */
+  transform: translateY(-50%);  /* perfectly centers it */
+  z-index: 2;
+  color: #fff;
+}
+
+.hero-text h1 {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 20px;   /* space before h2 */
+  color: #fff;
+}
+
+
+.hero-text h2 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #eaeaea;
+  margin-left: 200px; /* indent */
+}
+
+.hero-text h1 span {
+  color: var(--primary);
+}
+
+/* floating white box anchored near bottom */
+.hero-box {
+  position: absolute;
+  bottom: -360px;              /* adjust this up/down */
+  background: rgba(255,255,255,0.95);
+  color: var(--text-dark);
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  max-width: 600px;
+  z-index: 0;
+}
+.btn { background:var(--accent); color:#fff; padding:12px 32px; border-radius:8px; text-decoration:none; font-weight:600; transition:background .3s, box-shadow .3s, transform .3s; display:inline-block; } 
+.btn:hover { background:#006ee0; box-shadow:0 4px 14px rgba(11,132,255,0.4); transform:translateY(-2px); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hero {
+    height: auto;
+    justify-content: flex-end;
+    padding-top: 120px;
+  }
+
+  .hero-text {
+    padding: 0 20px 40px;
+  }
+
+  .hero-text h1 {
+    font-size: 2.5rem;
+    text-align: left;
+  }
+
+  .hero-box {
+    padding: 20px;
+    max-width: 100%;
+  }
+}
+
+
+/* ---------- CONTENT ---------- */
+section {
+  width: 100%;
+  margin: 100px 0;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+.fade-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: var(--gap);
+  margin-bottom: 100px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.fade-block.visible { opacity: 1; transform: translateY(0); }
+.fade-block:nth-of-type(even) { flex-direction: row-reverse; }
+.fade-block img {
+  width: 45%;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.fade-block .text { width: 50%; }
+.fade-block .text h3 {
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+.fade-block .btn { margin-top: 20px; }
+
+@media (max-width: 900px) {
+  .fade-block { flex-direction: row-reverse; }
+  .fade-block img, .fade-block .text { width: 100%; }
+}
+
+/* ---------- TESTIMONIALS ---------- */
+#testimonials {
+  margin-top: 100px;
+  padding: 0 40px;
+}
+.testimonial {
+  background: #fff;
+  border-left: 4px solid var(--accent);
+  padding: 24px;
+  border-radius: 10px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.testimonial img {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.testimonial-content { flex: 1; }
+.testimonial p { font-style: italic; }
+.testimonial span {
+  display: block;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 10px;
+}
+
+/* ---------- CTA ---------- */
+.cta {
+  background: var(--primary);
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px 60px;
+  margin-bottom: 0;
+}
+.cta h2 { font-size: 2rem; margin-bottom: 10px; }
+.cta p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 20px;
+}
+.cta a {
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.cta a:hover { background: #006ee0; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+
+/* ---------- FOOTER ---------- */
+footer {
+  background:var(--primary);
+  color: white;
+  padding: 30px 50px;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 20px;
+}
+.footer-left { display: flex; align-items: center; gap: 30px; }
+.footer-logo { width: 50px; height: 50px; border-radius: 8px; }
+.footer-nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+.footer-nav a:hover { color: var(--accent); }
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+.social-icons a img {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 5px;
+  transition: transform 0.3s;
+}
+.social-icons a img:hover { transform: scale(1.1); }
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 15px;
+  font-size: 0.9rem;
+  color: white;
+}
+.footer-bottom span { color:white; }
+
+@media (max-width: 900px) {
+  .footer-container {
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    padding: 40px 20px;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 10px;
     text-align: center;
-    color: #1e8e7e;
+  }
+  .footer-left { flex-direction: column; }
+}
+
+/* ---------- MOBILE OPTIMIZATION ---------- */
+@media (max-width: 900px) {
+  /* General Layout */
+  body {
+    font-size: 15px;
+    line-height: 1.6;
   }
 
-  p {
-    text-align: center;
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 40px;
+  header {
+    padding: 0 20px;
   }
 
-  .hub-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-    width: 100%;
-    max-width: 1100px;
+  .menu-toggle {
+    display: flex;
   }
 
-  .site-card {
+  nav ul {
+    display: none;
+    flex-direction: column;
     background: white;
-    border-radius: 16px;
-    padding: 25px;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px 0;
     text-align: center;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
+  }
+  nav ul.show {
+    display: flex;
+  }
+  nav ul li {
+    margin: 10px 0;
   }
 
-  .site-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  /* HERO Section */
+  .hero {
+    height: auto;
+    padding-top: 120px;
+    padding-bottom: 60px;
+    margin-top: 40px;
+    text-align: center;
+    justify-content: center;
   }
 
-  .site-card h2 {
-    color: #1e8e7e;
-    font-size: 1.3rem;
+  .hero-text {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    padding: 0 20px;
+  }
+
+  .hero-text h1 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+
+  .hero-text h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #f2f2f2;
+    margin: 10px 0 20px;
+    margin-left: 0;
+  }
+
+  .hero-box {
+    position: static;
+    margin: 0 auto;
+    margin-top: 20px;
+    max-width: 90%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  }
+
+  /* Fade Blocks (About, History, etc.) */
+  .fade-block {
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 60px;
+    /* text-align: center; */
+  }
+  .fade-block img,
+  .fade-block .text {
+    width: 100%;
+  }
+
+  /* Testimonials */
+  #testimonials {
+    padding: 0 20px;
+  }
+  .testimonial {
+    flex-direction: column;
+    text-align: center;
+  }
+  .testimonial img {
     margin-bottom: 10px;
   }
 
-  .site-card p {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 20px;
+  /* CTA */
+  .cta {
+    padding: 60px 20px;
+  }
+  .cta h2 {
+    font-size: 1.5rem;
+  }
+  .cta p {
+    font-size: 1rem;
   }
 
-  .site-card a {
-    display: inline-block;
-    background: #1e8e7e;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.3s ease;
-  }
-
-  .site-card button {
-    display: inline-block;
-    background: #1e8e7e;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.3s ease;
-  }
-
-  .site-card button:hover {
-    background: #15685f;
-  }
-
-  .site-card a:hover {
-    background: #15685f;
-  }
-
+  /* Footer */
   footer {
-    margin-top: 60px;
-    font-size: 0.9rem;
-    color: #555;
-    opacity: 0.8;
+    padding: 20px;
+    text-align: center;
   }
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-left {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-right {
+    flex-direction: column;
+  }
+  .social-icons a img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
 </style>
 </head>
 <body>
 
-  <h1>Plexus Hub</h1>
-  <p>Select a site to visit</p>
+<header>
+  <h1>Plexus Health</h1>
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" onclick="toggleDropdown(event)">Our Business ▾</a>
+        <div class="dropdown-content">
+          <a href="#">Plexus CPR</a>
+          <a href="#">Plexus Health Club</a>
+          <a href="#">Plexus Event</a>
+          <a href="./programs.html">See More</a>
+        </div>
+      </li>
+      <li><a href="#benefits">Benefits</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <div class="hub-grid">
-    <div class="site-card">
-      <h2>Plexus CPR</h2>
-      <p>Training and certification website for CPR and life support.</p>
-      <a href="./welcome.html">Visit</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <h1>Plexus<br><span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Health</span></h1>
+    <h2><em>Where knowledge Meets Accreditation, Skills Meet Excellence, and the Future Starts Here</em></h2>
+    <div class="hero-box">
+      <p>We are a specialized medical training center committed to delivering high-quality, 
+        accredited education that empowers healthcare professionals to reach their full potential.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="fade-block">
+  <img src="./Pictures/facility.jpg" alt="Facility">
+  <div class="text">
+    <h3>About Us - Why Choose Us</h3>
+    <p>We are more than just a training center — we are your partners in advancing your medical competence.</p>
+    <ul>
+      <li>Official accreditations from leading health authorities.</li>
+      <li>Modern simulation facilities for hands-on learning.</li>
+      <li>Strategic location: Emaar Square, Jeddah Gate.</li>
+      <li>Expert faculty with real-world clinical experience.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="history" class="fade-block">
+  <img src="./Pictures/history.jpg" alt="History">
+  <div class="text">
+    <h3>History</h3>
+    <ul>
+      <li>Founded from the legacy of Safety Training Center.</li>
+      <li>Over 25 years of continuous education experience.</li>
+      <li>More than 4,000 healthcare professionals trained.</li>
+      <li>Expanding to include CME and leadership development programs.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="DrZuhair" class="fade-block">
+  <img src="./Pictures/DrZuhair.jpg"  alt="Dr.Zuhair">
+  <div class="text">
+    <h3>Founders</h3>
+    <p><strong>Dr. Zuhair Al-Subaie</strong></p>
+    <p><em>Founder of the Safety Training Center and the former owner</em></p>
+    <ul>
+      <li>A well known Saudi Doctor and media writer.</li>
+      <li>Specialized in Family and Community Medicine and Healthcare.</li>
+      <li>Former member of the Saudi Shura Council (1993-2005).</li>
+      <li>Hosted “Medicine and Life” TV program for 15 years.</li>
+      <li>Faculty member, King Saud University College of Medicine.</li>
+      <li>Founder and Dean of the College of Medicine in Abha.</li>
+      <li>Held leadership roles in the Ministry of Health.</li>
+      <li>Chaired Saudi & Arab Board for Family and Child Medicine.</li>
+      <li>Authored numerous health education books.</li>
+      <li>Founded Safety Health Training Center, offering 619+ courses.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="DrSahar" class="fade-block">
+  <img src="./Pictures/DrSahar.jpg" alt="Dr.Sahar">
+  <div class="text">
+    <p><strong>Dr. Sahar Al-Subaie</strong></p>
+    <p><em>Owner of Plexus Health</em></p>
+    <ul>
+      <li>Nuclear Medicine Consultant (ABNM).</li>
+      <li>Worked at Aramco (1995-2013).</li>
+      <li>Founded Nuclear Medicine & Bone Density units at Aramco Hospital.</li>
+      <li>Now Consultant at Guard Hospital.</li>
+      <li>Board member & founder of Saudi Nuclear Medicine Society.</li>
+      <li>Speaker & organizer in international conferences.</li>
+      <li>Founder of Plexus Business Holding, Plexus CPR, and Plexus CME.</li>
+      <li>Accredited by Saudi Heart Association.</li>
+      <li>Birkman Consultant with 700+ clients.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="programs" class="fade-block">
+  <img src="./Pictures/training.jpg" alt="Training">
+  <div class="text">
+    <h3>Our Programs</h3>
+    <ul>
+      <li>ACLS, BLS, HeartSaver / First Aid</li>
+      <li>Continuous Medical Education (CME)</li>
+      <li>PALS, NRP, and upcoming workshops</li>
+      <li>Corporate medical training partnerships</li>
+    </ul>
+    <a href="./programs.html" class="btn">Learn More</a>
+  </div>
+</section>
+
+<section id="benefits" class="fade-block">
+  <img src="./Pictures/benefits.jpg" alt="Benefits">
+  <div class="text">
+    <h3>Benefits</h3>
+    <ul>
+      <li>Earn accredited certificates.</li>
+      <li>Enhance your practical skills.</li>
+      <li>Expand your medical network.</li>
+      <li>Boost your career opportunities.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="testimonials">
+  <h2>Testimonials</h2>
+  <div class="testimonial">
+    <img src="./Pictures/dr1.jpg" alt="Dr Ahmed">
+    <div class="testimonial-content">
+      <p>“The ACLS course at Plexus Health gave me real confidence in handling emergencies.”</p>
+      <span>- Dr. Ahmed Al-Sulaimi, Emergency Physician</span>
+    </div>
+  </div>
+  <div class="testimonial">
+    <img src="./Pictures/nurse1.jpg" alt="Nora">
+    <div class="testimonial-content">
+      <p>“Hands-on training that feels real. The best investment I've made for my career.”</p>
+      <span>- Nora Al-Harbi, ICU Nurse</span>
+    </div>
+  </div>
+  <div class="testimonial">
+    <img src="./Pictures/hr1.jpg" alt="HR Director">
+    <div class="testimonial-content">
+      <p>“We were looking for a trusted training partner for our hospital staff — Plexus Health was perfect.”</p>
+      <span>- HR Director, Private Hospital in Jeddah</span>
+    </div>
+  </div>
+  <div class="testimonial">
+    <img src="./Pictures/student1.jpg" alt="Layan">
+    <div class="testimonial-content">
+      <p>“As a final-year student, the BLS course was a turning point for me.”</p>
+      <span>- Layan Abdullah, Nursing Student</span>
+    </div>
+  </div>
+</section>
+<!-- CONTACT / CTA -->
+<section id="contact" class="cta">
+  <h2>Begin Your Journey to Medical Excellence</h2>
+  <p>Register now and take your career to the next level with accredited medical training programs.</p>
+  <a href="https://wa.me/966500000000?text=I'm%20interested%20in%20Plexus%20Health%20programs">Register Now</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-left">
+      <img src="./Pictures/logo_cropped_circle.png" alt="Plexus Logo" class="footer-logo">
+      <nav class="footer-nav">
+        <a href="#about">About Us</a>
+        <a href="#programs">Our Programs</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
 
-    <div class="site-card">
-      <h2>Plexus Health</h2>
-      <p>Plexus CME add description here</p>
-      <a href="./Plexushealth/index.html">Visit</a>
+    <div class="footer-right">
+      <div class="social-icons">
+        <a href="#"><img src="./Pictures/youtube.svg" alt="YouTube"></a>
+        <a href="#"><img src="./Pictures/facebook.svg" alt="Facebook"></a>
+        <a href="#"><img src="./Pictures/twitter.svg" alt="Twitter"></a>
+        <a href="#"><img src="./Pictures/instagram.svg" alt="Instagram"></a>
+        <a href="#"><img src="./Pictures/linkedin.svg" alt="LinkedIn"></a>
+      </div>
     </div>
-
-    <div class="site-card">
-      <h2>Plexus Studio</h2>
-      <p>Plexus Studio Description here</p>
-      <button onclick="alert('Coming Soon')">Visit</button>
-    </div>
-
-     <div class="site-card">
-      <h2>Plexus Training</h2>
-      <p>Training Facility description here</p>
-      <button onclick="alert('Coming Soon')">Visit</button>
-      <!-- <a href="contact.html">Visit</a> -->
-    </div>
-
-    <div class="site-card">
-      <h2>Plexus Events</h2>
-      <p>Plexus Events</p>
-      <button onclick="alert('Coming Soon')">Visit</button>
-      <!-- <a href="dental.html">Visit</a> -->
-    </div>
-
-    <div class="site-card">
-      <h2>Contact Us</h2>
-      <p>Contact us for more</p>
-      <button onclick="alert('Coming Soon')">Visit</button>
-      <!-- <a href="order.html">Visit</a> -->
-    </div>
-
-    <div class="site-card">
-      <h2>Plexus Co-working space</h2>
-      <p>Plexus Co-working space</p>
-      <button onclick="alert('Coming Soon')">Visit</button>
-      <!-- <a href="bls.html">Visit</a> -->
-    </div>
-
-    <div class="site-card">
-      <h2>Plexus Incubator</h2>
-      <p>Plexus Incubator</p>
-      <button onclick="alert('Coming Soon')">Visit</button>
-      <!-- <a href="#">Current</a> -->
-    </div>
-<!-- 
-    <div class="site-card">
-      <h2>Homepage</h2>
-      <p>Plexus Incubator</p>
-      <a href="./homepage.html">Visit</a>
-    </div> -->
   </div>
 
-  <footer><p>&copy;2025 Plexus. All rights reserved.</p></footer>
+  <div class="footer-bottom">
+    &copy; 2025 <span>Plexus Health</span>. All rights reserved.
+  </div>
+</footer>
 
+
+<script>
+const faders = document.querySelectorAll('.fade-block');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.25 });
+faders.forEach(el => observer.observe(el));
+
+function toggleMenu() {
+  document.querySelector("nav ul").classList.toggle("show");
+}
+function toggleDropdown(e) {
+  e.preventDefault();
+  const dropdown = e.target.closest(".dropdown");
+  dropdown.classList.toggle("open");
+}
+document.addEventListener("click", e => {
+  document.querySelectorAll(".dropdown").forEach(dd => {
+    if (!dd.contains(e.target)) dd.classList.remove("open");
+  });
+});
+</script>
 </body>
 </html>
